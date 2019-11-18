@@ -1,5 +1,4 @@
 import sys
-sys.path.append('../..')
 
 import pyArena.core as pyacore
 import pyArena.algorithms.gaussian_process as GP

@@ -1,5 +1,4 @@
 import sys
-sys.path.append('../..')
 
 import numpy as np
 import pyArena.core as pyacore
@@ -70,7 +69,7 @@ class SensorPlacement:
                     # Compute conditional entropy as H(y|X_{A_k-1}, D) = H(y, X_{A_k-1}| D) - H(X_{A_k-1}| D)
                     joint_sensor_locations = np.append(self.optimal_placements_entropy[0:sensor_index], [inp_locs[location_index]], axis=0)
                     mean, var = gp.gp.predict_value(joint_sensor_locations)
-                    joint_entropy[location_index] = 0.5*np.log(np.linalg.det(var)) + (sensor_index + 1)*0.5*(1 + np.log(2*np.pi))
+                    joint_entropy[location_index] = 0.5*np.log(np.linalg.det(var)) #+ (sensor_index + 1)*0.5*(1 + np.log(2*np.pi))
                     conditional_entropy[location_index] = joint_entropy[location_index] - previous_conditional_entropy
 
             max_id = np.argwhere(conditional_entropy == np.max(conditional_entropy))
@@ -188,7 +187,7 @@ if __name__ == "__main__":
     area.grid_x = 10
     area.grid_y = 10
     area.numGrids = area.grid_x*area.grid_y
-    area.numTrain = 30
+    area.numTrain = 10
     area.numTruth = 100
 
     # Create a GP model
